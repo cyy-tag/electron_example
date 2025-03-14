@@ -1,4 +1,4 @@
-const {app, BrowserWindow, icpMain} = require('electron');
+const {app, BrowserWindow, ipcMain} = require('electron');
 const path = require('path');
 
 let mainWindow;
@@ -37,7 +37,7 @@ app.on('activate', function() {
 });
 
 // 监听渲染进程发送的消息
-icpMain.on('renderer-to-main', (event, arg) => {
+ipcMain.on('renderer-to-main', (event, arg) => {
   console.log('Received from renderer:', arg);
   event.reply('main-to-renderer', 'Hello from main process!');
 });
